@@ -1,7 +1,7 @@
 window.tabId=0;
 var stmt = {};
 var url = [];
-const port = 3000;
+const port = 3001;
 
 function getHeaderString(headers) {
   let responseHeader = '';
@@ -66,14 +66,14 @@ chrome.tabs.query({active:true},
           console.log("debugger attached");
      } );
     chrome.debugger.sendCommand({tabId:tabId}, "Network.enable");
-    // chrome.debugger.sendCommand({tabId:tabId}, "Fetch.enable", { patterns: [{ urlPattern: '*' }] });
+    chrome.debugger.sendCommand({tabId:tabId}, "Fetch.enable", { patterns: [{ urlPattern: '*' }] });
 
-    // // blocking specified request
-    // chrome.webRequest.onBeforeRequest.addListener(
-    //   function(details) { return {cancel: true}; },
-    //   {urls: url},
-    //   ["blocking"]
-    // );
+    // blocking specified request
+    chrome.webRequest.onBeforeRequest.addListener(
+      function(details) { return {cancel: true}; },
+      {urls: url},
+      ["blocking"]
+    );
     chrome.debugger.onEvent.addListener(onEvent);
   })
 
@@ -102,7 +102,7 @@ function onEvent(debuggeeId, message, params) {
       }); 
   }
   else if (message == "Network.requestWillBeSentExtraInfo"){
-    fetch("http://localhost:3000/requestinfo", {
+    fetch(`http://localhost:${port}/requestinfo`, {
       method: "POST", 
       body: JSON.stringify({
       "request_id":params.requestId,

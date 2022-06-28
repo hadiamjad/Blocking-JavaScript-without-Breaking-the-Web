@@ -1,7 +1,7 @@
 window.tabId=0;
 var stmt = {};
 var url = [];
-const port = 3000;
+const port = 3002;
 
 function getHeaderString(headers) {
   let responseHeader = '';
@@ -66,7 +66,7 @@ chrome.tabs.query({active:true},
           console.log("debugger attached");
      } );
     chrome.debugger.sendCommand({tabId:tabId}, "Network.enable");
-    // chrome.debugger.sendCommand({tabId:tabId}, "Fetch.enable", { patterns: [{ urlPattern: '*' }] });
+    chrome.debugger.sendCommand({tabId:tabId}, "Fetch.enable", { patterns: [{ urlPattern: '*' }] });
 
     // // blocking specified request
     // chrome.webRequest.onBeforeRequest.addListener(
@@ -102,7 +102,7 @@ function onEvent(debuggeeId, message, params) {
       }); 
   }
   else if (message == "Network.requestWillBeSentExtraInfo"){
-    fetch("http://localhost:3000/requestinfo", {
+    fetch(`http://localhost:${port}/requestinfo`, {
       method: "POST", 
       body: JSON.stringify({
       "request_id":params.requestId,
@@ -143,31 +143,31 @@ function onEvent(debuggeeId, message, params) {
               });
       });
   }
-  // var continueParams = {
-  //   requestId: params.requestId,
-  // };
+  var continueParams = {
+    requestId: params.requestId,
+  };
   
-  // if (message == "Fetch.requestPaused"){
-  //     if (stmt.hasOwnProperty(params.request.url)){ 
-  //       ajaxMe(params.request.url, params.request.headers, params.request.method, params.request.postData, (data) => {
-  //           continueParams.responseCode = 200;
-  //           for(let i=0; i<stmt[params.request.url].length; i++){
-  //             console.log("requestPaused");
-  //             console.log(params.request.url);
-  //             data.response = editResponse(data.response, stmt[params.request.url][i][1], stmt[params.request.url][i][2]);
-  //             // data.response = replaceMethod(data.response, stmt[params.request.url][i][0]);
-  //           }
-  //           continueParams.binaryResponseHeaders = btoa(unescape(encodeURIComponent(data.headers.replace(/(?:\r\n|\r|\n)/g, '\0'))));
-  //           continueParams.body = btoa(unescape(encodeURIComponent(data.response)));
-  //           chrome.debugger.sendCommand({tabId:debuggeeId.tabId}, 'Fetch.fulfillRequest', continueParams);
-  //       }, (status) => {
-  //         chrome.debugger.sendCommand({tabId:debuggeeId.tabId}, 'Fetch.continueRequest', continueParams);
-  //       });
-  //     }
-  //     else {
-  //       console.log('request stopping')
-  //       chrome.debugger.sendCommand({tabId:debuggeeId.tabId}, 'Fetch.continueRequest', continueParams);}
-  // } 
+  if (message == "Fetch.requestPaused"){
+      if (stmt.hasOwnProperty(params.request.url)){ 
+        ajaxMe(params.request.url, params.request.headers, params.request.method, params.request.postData, (data) => {
+            continueParams.responseCode = 200;
+            for(let i=0; i<stmt[params.request.url].length; i++){
+              console.log("requestPaused");
+              console.log(params.request.url);
+              data.response = editResponse(data.response, stmt[params.request.url][i][1], stmt[params.request.url][i][2]);
+              // data.response = replaceMethod(data.response, stmt[params.request.url][i][0]);
+            }
+            continueParams.binaryResponseHeaders = btoa(unescape(encodeURIComponent(data.headers.replace(/(?:\r\n|\r|\n)/g, '\0'))));
+            continueParams.body = btoa(unescape(encodeURIComponent(data.response)));
+            chrome.debugger.sendCommand({tabId:debuggeeId.tabId}, 'Fetch.fulfillRequest', continueParams);
+        }, (status) => {
+          chrome.debugger.sendCommand({tabId:debuggeeId.tabId}, 'Fetch.continueRequest', continueParams);
+        });
+      }
+      else {
+        console.log('request stopping')
+        chrome.debugger.sendCommand({tabId:debuggeeId.tabId}, 'Fetch.continueRequest', continueParams);}
+  } 
 }
 
 var version = "1.0";

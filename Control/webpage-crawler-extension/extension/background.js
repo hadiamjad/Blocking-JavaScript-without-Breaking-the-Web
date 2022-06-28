@@ -102,7 +102,7 @@ function onEvent(debuggeeId, message, params) {
       }); 
   }
   else if (message == "Network.requestWillBeSentExtraInfo"){
-    fetch("http://localhost:3000/requestinfo", {
+    fetch(`http://localhost:${port}/requestinfo`, {
       method: "POST", 
       body: JSON.stringify({
       "request_id":params.requestId,
