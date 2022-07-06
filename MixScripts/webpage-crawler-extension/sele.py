@@ -13,7 +13,11 @@ import os
 display = Display(visible=0, size=(800, 600))
 display.start()
 
-df = pd.read_csv(r"02.csv")
+def extractDigits(lst):
+    return list(map(lambda el:[el], lst))
+
+df = pd.DataFrame(extractDigits(os.listdir('/home/student/TrackerSift/ScriptML/webpage-crawler-extension/server/output')), columns=['website'])
+# df = pd.read_csv(r"02.csv")
 # extractDigits(os.listdir('/home/student/TrackerSift/UserStudy/output'))
 # df = pd.DataFrame([["washingtonpost.com/"]], columns=["website"])
 
