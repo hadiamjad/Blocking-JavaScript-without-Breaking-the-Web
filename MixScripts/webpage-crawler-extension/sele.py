@@ -3,23 +3,23 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 
-from pyvirtualdisplay import Display
+# from pyvirtualdisplay import Display
 import pandas as pd
 import requests
 import os
 
 
 # virtual display
-display = Display(visible=0, size=(800, 600))
-display.start()
+# display = Display(visible=0, size=(800, 600))
+# display.start()
 
 def extractDigits(lst):
     return list(map(lambda el:[el], lst))
 
-df = pd.DataFrame(extractDigits(os.listdir('/home/student/TrackerSift/ScriptML/webpage-crawler-extension/server/output')), columns=['website'])
+# df = pd.DataFrame(extractDigits(os.listdir('/home/student/TrackerSift/ScriptML/webpage-crawler-extension/server/output')), columns=['website'])
 # df = pd.read_csv(r"02.csv")
 # extractDigits(os.listdir('/home/student/TrackerSift/UserStudy/output'))
-# df = pd.DataFrame([["washingtonpost.com/"]], columns=["website"])
+df = pd.DataFrame([["nvidia.com/"]], columns=["website"])
 
 
 count = 0
@@ -77,4 +77,5 @@ for i in df.index:
             driver.quit()
         except:
             pass
+        os.mkdir("server/output/crashed/" + df["website"][i])
         print(r"Crashed: " + str(i) + " website: " + df["website"][i])
