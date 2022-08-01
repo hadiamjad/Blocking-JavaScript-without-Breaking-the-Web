@@ -1,5 +1,5 @@
 {
-    "name": "NetworkCallStackCapture",
+    "name": "Script Blocking experiment",
     "description": "Displays the live log with the http requests headers",
     "version": "0.7",
     "permissions": [

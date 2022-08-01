@@ -17,9 +17,9 @@ def extractDigits(lst):
     return list(map(lambda el:[el], lst))
 
 # df = pd.DataFrame(extractDigits(os.listdir('/home/student/TrackerSift/ScriptML/webpage-crawler-extension/server/output')), columns=['website'])
-# df = pd.read_csv(r"02.csv")
+df = pd.read_csv(r"02.csv")
 # extractDigits(os.listdir('/home/student/TrackerSift/UserStudy/output'))
-df = pd.DataFrame([["nvidia.com/"]], columns=["website"])
+#df = pd.DataFrame([["indiatimes.com/"]], columns=["website"])
 
 
 count = 0
@@ -53,8 +53,12 @@ for i in df.index:
             )
             driver.get(r"https://www." + df["website"][i])
 
-            # sleep
-            time.sleep(15)
+            val = input("press 'c' to continue or 's' to stop")
+            if str(val) == 'c':
+                # sleep
+                time.sleep(240)
+            else:
+                pass
 
             # dictionary collecting logs
             # 1: Logs 2: PageSource
