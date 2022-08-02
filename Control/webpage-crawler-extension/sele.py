@@ -3,15 +3,15 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 
-#from pyvirtualdisplay import Display
+# from pyvirtualdisplay import Display
 import pandas as pd
 import requests
 import os
 
 
 # virtual display
-#display = Display(visible=0, size=(800, 600))
-#display.start()
+# display = Display(visible=0, size=(800, 600))
+# display.start()
 
 df = pd.read_csv(r"02.csv")
 # extractDigits(os.listdir('/home/student/TrackerSift/UserStudy/output'))
@@ -50,7 +50,7 @@ for i in df.index:
             driver.get(r"https://www." + df["website"][i])
 
             val = input("press 'c' to continue or 's' to stop")
-            if str(val) == 'c':
+            if str(val) == "c":
                 # sleep
                 time.sleep(240)
             else:

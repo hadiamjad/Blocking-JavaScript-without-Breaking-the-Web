@@ -13,13 +13,15 @@ import os
 # display = Display(visible=0, size=(800, 600))
 # display.start()
 
+
 def extractDigits(lst):
-    return list(map(lambda el:[el], lst))
+    return list(map(lambda el: [el], lst))
+
 
 # df = pd.DataFrame(extractDigits(os.listdir('/home/student/TrackerSift/ScriptML/webpage-crawler-extension/server/output')), columns=['website'])
 df = pd.read_csv(r"02.csv")
 # extractDigits(os.listdir('/home/student/TrackerSift/UserStudy/output'))
-#df = pd.DataFrame([["indiatimes.com"]], columns=["website"])
+# df = pd.DataFrame([["indiatimes.com"]], columns=["website"])
 
 
 count = 0
@@ -54,7 +56,7 @@ for i in df.index:
             driver.get(r"https://www." + df["website"][i])
 
             val = input("press 'c' to continue or 's' to stop")
-            if str(val) == 'c':
+            if str(val) == "c":
                 # sleep
                 time.sleep(240)
             else:
