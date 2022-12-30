@@ -7,15 +7,16 @@ import time
 import pandas as pd
 import requests
 import os
+import sys
 
 
 # virtual display
 # display = Display(visible=0, size=(800, 600))
 # display.start()
 
-df = pd.read_csv(r"02.csv")
+df = pd.read_csv(r"C:/Users/Hadiy/OneDrive/Desktop/ASE-22/csv/test.csv")
 # extractDigits(os.listdir('/home/student/TrackerSift/UserStudy/output'))
-# df = pd.DataFrame([["washingtonpost.com/"]], columns=["website"])
+#df = pd.DataFrame([[sys.argv[1]]], columns=["website"])
 
 
 count = 0
@@ -27,7 +28,7 @@ for i in df.index:
         else:
             dic = {}
             # extension filepath
-            ext_file = "extension"
+            ext_file = "C:/Users/Hadiy/OneDrive/Desktop/ASE-22/Control/webpage-crawler-extension/extension"
 
             opt = webdriver.ChromeOptions()
             # devtools necessary for complete network stack capture
@@ -49,21 +50,18 @@ for i in df.index:
             )
             driver.get(r"https://www." + df["website"][i])
 
-            val = input("press 'c' to continue or 's' to stop")
-            if str(val) == "c":
-                # sleep
-                time.sleep(240)
-            else:
-                pass
+            time.sleep(15)
 
-            # dictionary collecting logs
-            # 1: Logs 2: PageSource
-            dic[df["website"][i]] = []
-            # saving logs in dictionary
-            dic[df["website"][i]].append(driver.get_log("browser"))
-            dic[df["website"][i]].append(driver.page_source)
-            # saving it in csv
-            pd.DataFrame(dic).to_csv("server/output/" + df["website"][i] + "/logs.csv")
+            # Collecting Metrics
+            # 1: page HTML
+            f= open("server/output/" + df["website"][i] + "/pageHTML.txt","w+")
+            f.write(driver.page_source)
+            f.close()
+            # 2: page Errors
+            f= open("server/output/" + df["website"][i] + "/pageErrors.txt","w+")
+            f.write(driver.get_log("browser"))
+            f.close()
+
             # driver.quit
             driver.quit()
 
