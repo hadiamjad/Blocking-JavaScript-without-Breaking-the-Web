@@ -140,11 +140,11 @@ def getScriptsMethods():
                         mixedScriptMethod[lst[0]] = []
                     mixedScriptMethod[lst[0]].append([lst[1], lst[2], lst[3]])
 
-    json.dump(trackingScripts + mixedScripts + functionalScripts, open("blocklist/ALL.json", "w"))
-    json.dump(trackingScripts + mixedScripts + functionalScripts, open("blocklist/TS.json", "w"))
-    json.dump(trackingScripts + mixedScripts + functionalScripts, open("blocklist/MS.json", "w"))
-    json.dump(trackingScripts + mixedScripts + functionalScripts, open("blocklist/TMS.json", "w"))
-    json.dump(trackingScripts + mixedScripts + functionalScripts, open("blocklist/TM.json", "w"))
+    json.dump(trackingScripts + mixedScripts + functionalScripts, open("ALL/webpage-crawler-extension/extension/ALL.json", "w"))
+    json.dump(trackingScripts, open("TS/webpage-crawler-extension/extension/TS.json", "w"))
+    json.dump(mixedScripts, open("MS/webpage-crawler-extension/extension/MS.json", "w"))
+    json.dump(trackingScripts + mixedScripts, open("TMS/webpage-crawler-extension/extension/TMS.json", "w"))
+    json.dump(mixedScriptMethod, open("TM/webpage-crawler-extension/extension/TM.json", "w"))
     
 
     # with open("blocklist/ALL.txt", "w") as log:

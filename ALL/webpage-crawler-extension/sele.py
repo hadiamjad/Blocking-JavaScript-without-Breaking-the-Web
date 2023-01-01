@@ -27,7 +27,7 @@ df = pd.DataFrame(extractDigits(os.listdir('C:/Users/Hadiy/OneDrive/Desktop/ASE-
 count = 0
 
 for i in df.index:
-    # try:
+    try:
         if i < 0:
             pass
         else:
@@ -55,12 +55,12 @@ for i in df.index:
             )
             driver.get(r"https://www." + df["website"][i])
 
-            time.sleep(15)
+            time.sleep(10)
 
             # Collecting Metrics
             # 1: page HTML
             f= open("server/output/" + df["website"][i] + "/pageHTML.txt","w+")
-            f.write(driver.page_source)
+            f.write(str(driver.page_source))
             f.close()
             # 2: page Errors
             f= open("server/output/" + df["website"][i] + "/pageErrors.txt","w+")
@@ -75,9 +75,9 @@ for i in df.index:
                 log.write(str(count))
                 log.close()
             print(r"Completed: " + str(i) + " website: " + df["website"][i])
-    # except:
-    #     try:
-    #         driver.quit()
-    #     except:
-    #         pass
-    #     print(r"Crashed: " + str(i) + " website: " + df["website"][i])
+    except:
+        try:
+            driver.quit()
+        except:
+            pass
+        print(r"Crashed: " + str(i) + " website: " + df["website"][i])

@@ -50,16 +50,16 @@ for i in df.index:
             )
             driver.get(r"https://www." + df["website"][i])
 
-            time.sleep(15)
+            time.sleep(10)
 
             # Collecting Metrics
             # 1: page HTML
-            f= open("server/output/" + df["website"][i] + "/pageHTML.txt","w+")
-            f.write(driver.page_source)
+            f= open("server/output/" + df["website"][i] + "/pageHTML.txt","w+", encoding="utf-8")
+            f.write(str(driver.page_source))
             f.close()
             # 2: page Errors
             f= open("server/output/" + df["website"][i] + "/pageErrors.txt","w+")
-            f.write(driver.get_log("browser"))
+            f.write(str(driver.get_log("browser")))
             f.close()
 
             # driver.quit
@@ -70,7 +70,8 @@ for i in df.index:
                 log.write(str(count))
                 log.close()
             print(r"Completed: " + str(i) + " website: " + df["website"][i])
-    except:
+    except Exception as e:
+        print(r'exception:', e)
         try:
             driver.quit()
         except:
