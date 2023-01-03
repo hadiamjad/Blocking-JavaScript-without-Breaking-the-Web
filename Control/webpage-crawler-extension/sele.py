@@ -3,7 +3,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 
-# from pyvirtualdisplay import Display
+from pyvirtualdisplay import Display
 import pandas as pd
 import requests
 import os
@@ -11,10 +11,10 @@ import sys
 
 
 # virtual display
-# display = Display(visible=0, size=(800, 600))
-# display.start()
+display = Display(visible=0, size=(800, 600))
+display.start()
 
-df = pd.read_csv(r"C:/Users/Hadiy/OneDrive/Desktop/ASE-22/csv/test.csv")
+df = pd.read_csv(r"/home/student/TrackerSift/ASE-22/csv/test.csv")
 # extractDigits(os.listdir('/home/student/TrackerSift/UserStudy/output'))
 #df = pd.DataFrame([[sys.argv[1]]], columns=["website"])
 
@@ -28,7 +28,7 @@ for i in df.index:
         else:
             dic = {}
             # extension filepath
-            ext_file = "C:/Users/Hadiy/OneDrive/Desktop/ASE-22/Control/webpage-crawler-extension/extension"
+            ext_file = "extension"
 
             opt = webdriver.ChromeOptions()
             # devtools necessary for complete network stack capture

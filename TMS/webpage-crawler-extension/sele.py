@@ -3,7 +3,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 
-# from pyvirtualdisplay import Display
+from pyvirtualdisplay import Display
 import pandas as pd
 import requests
 import os
@@ -11,14 +11,14 @@ import sys
 
 
 # virtual display
-# display = Display(visible=0, size=(800, 600))
-# display.start()
+display = Display(visible=0, size=(800, 600))
+display.start()
 
 def extractDigits(lst):
     return list(map(lambda el: [el], lst))
 
 
-df = pd.DataFrame(extractDigits(os.listdir('C:/Users/Hadiy/OneDrive/Desktop/ASE-22/Control/webpage-crawler-extension/server/output')), columns=['website'])
+df = pd.DataFrame(extractDigits(os.listdir('/home/student/TrackerSift/ASE-22/Control/webpage-crawler-extension/server/output')), columns=['website'])
 #df = pd.read_csv(r"C:/Users/Hadiy/OneDrive/Desktop/ASE-22/csv/test.csv")
 # extractDigits(os.listdir('/home/student/TrackerSift/UserStudy/output'))
 #df = pd.DataFrame([[sys.argv[1]]], columns=["website"])
@@ -33,7 +33,7 @@ for i in df.index:
         else:
             dic = {}
             # extension filepath
-            ext_file = "C:/Users/Hadiy/OneDrive/Desktop/ASE-22/TMS/webpage-crawler-extension/extension"
+            ext_file = "extension"
 
             opt = webdriver.ChromeOptions()
             # devtools necessary for complete network stack capture
@@ -59,12 +59,12 @@ for i in df.index:
 
             # Collecting Metrics
             # 1: page HTML
-            f= open("server/output/" + df["website"][i] + "/pageHTML.txt","w+")
+            f= open("server/output/" + df["website"][i] + "/pageHTML.txt","w+", encoding="utf-8")
             f.write(str(driver.page_source))
             f.close()
             # 2: page Errors
             f= open("server/output/" + df["website"][i] + "/pageErrors.txt","w+")
-            f.write(driver.get_log("browser"))
+            f.write(str(driver.get_log("browser")))
             f.close()
 
             # driver.quit
