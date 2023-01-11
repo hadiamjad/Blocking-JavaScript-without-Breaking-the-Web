@@ -197,8 +197,9 @@ def main():
     fold = os.listdir(
         "server/output"
     )
+    count = 0
     for f in fold:
-        if ".com" in f:
+        try:
             print(f)
             intilization(
                 "server/output/"
@@ -208,6 +209,9 @@ def main():
                 + f
                 + "/",
             )
+        except:
+            count +=1
+            print(count)
 
 
 main()

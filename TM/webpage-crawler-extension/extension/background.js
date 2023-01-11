@@ -27,6 +27,11 @@ async function ajaxMe(url, headers, method, postData, success, error) {
   }
 }
 
+function setCharAt(str,index,chr) {
+  if(index > str.length-1) return str;
+  return str.substring(0,index) + "not" + str.substring(index);
+}
+
 function editResponse(resp, lineNo, columnNo) {
   var startLine;
   var endLine;
@@ -151,7 +156,7 @@ function onEvent(debuggeeId, message, params) {
   };
   
   if (message == "Fetch.requestPaused"){
-    const url = chrome.extension.getURL('TS.json');
+    const url = chrome.extension.getURL('TM.json');
     fetch(url)
         .then((response) => response.json())
         .then((json) => {
@@ -162,8 +167,11 @@ function onEvent(debuggeeId, message, params) {
                 for(let i=0; i<stmt[params.request.url].length; i++){
                   console.log("requestPaused");
                   console.log(params.request.url + stmt[params.request.url][i][1]+ stmt[params.request.url][i][2]);
-                  data.response = data.response + "Object.defineProperty(window, 'd', {value: function(){console.log('hadi')}});";
-                  //data.response = editResponse(data.response, stmt[params.request.url][i][1], stmt[params.request.url][i][2]);
+                  //data.response = data.response + "Object.defineProperty(window, 'd', {value: function(){console.log('hadi')}});";
+                  // data.response = editResponse(data.response, stmt[params.request.url][i][1], stmt[params.request.url][i][2]);
+                  lines = data.response.split(/\r\n|\r|\n/);
+                  lines[stmt[params.request.url][i][1]] = setCharAt(lines[stmt[params.request.url][i][1]] ,stmt[params.request.url][i][2],'x');
+                  data.response = lines.join('\n');
                   // data.response = replaceMethod(data.response, stmt[params.request.url][i][0]);
                 }
                 console.log('requestContinued');

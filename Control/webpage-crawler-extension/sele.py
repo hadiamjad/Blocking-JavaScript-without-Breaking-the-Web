@@ -19,11 +19,11 @@ df = pd.read_csv(r"/home/student/TrackerSift/ASE-22/csv/test.csv")
 #df = pd.DataFrame([[sys.argv[1]]], columns=["website"])
 
 
-count = 0
+count = 65
 
 for i in df.index:
     try:
-        if i < 0:
+        if i < 90:
             pass
         else:
             dic = {}

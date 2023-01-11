@@ -197,17 +197,21 @@ def main():
     fold = os.listdir(
         "server/output"
     )
-    for f in fold:
-        if ".com" in f:
-            print(f)
-            intilization(
-                "server/output/"
-                + f
-                + "/request.json",
-                "server/output/"
-                + f
-                + "/",
-            )
+    count = 0 
+    try:
+        for f in fold:
+                print(f)
+                intilization(
+                    "server/output/"
+                    + f
+                    + "/request.json",
+                    "server/output/"
+                    + f
+                    + "/",
+                )
+    except:
+        count +=1
+        print(count)
 
 
 main()

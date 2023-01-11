@@ -16,6 +16,6 @@
           "run_at": "document_start"
       }
   ],
-  "web_accessible_resources": ["inject.js", "TS.json"],
+  "web_accessible_resources": ["inject.js", "TM.json"],
   "manifest_version": 2
 }
