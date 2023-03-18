@@ -14,16 +14,16 @@ import sys
 display = Display(visible=0, size=(800, 600))
 display.start()
 
-df = pd.read_csv(r"/home/student/TrackerSift/ASE-22/csv/test.csv")
+df = pd.read_csv(r"csv/test.csv")
 # extractDigits(os.listdir('/home/student/TrackerSift/UserStudy/output'))
-#df = pd.DataFrame([[sys.argv[1]]], columns=["website"])
+# df = pd.DataFrame([['livescore.com']], columns=["website"])
 
 
-count = 65
+count = 0
 
 for i in df.index:
-    try:
-        if i < 90:
+    # try:
+        if i < 0:
             pass
         else:
             dic = {}
@@ -37,6 +37,7 @@ for i in df.index:
             opt.add_argument("load-extension=" + ext_file)
             # important for linux
             opt.add_argument("--no-sandbox")
+            opt.add_argument("--disable-dev-shm-usage")
 
             dc = DesiredCapabilities.CHROME
             dc["goog:loggingPrefs"] = {"browser": "ALL"}
@@ -50,7 +51,7 @@ for i in df.index:
             )
             driver.get(r"https://www." + df["website"][i])
 
-            time.sleep(10)
+            time.sleep(20)
 
             # Collecting Metrics
             # 1: page HTML
@@ -70,10 +71,10 @@ for i in df.index:
                 log.write(str(count))
                 log.close()
             print(r"Completed: " + str(i) + " website: " + df["website"][i])
-    except Exception as e:
-        print(r'exception:', e)
-        try:
-            driver.quit()
-        except:
-            pass
-        print(r"Crashed: " + str(i) + " website: " + df["website"][i])
+    # except Exception as e:
+    #     print(r'exception:', e)
+    #     try:
+    #         driver.quit()
+    #     except:
+    #         pass
+    #     print(r"Crashed: " + str(i) + " website: " + df["website"][i])

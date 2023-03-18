@@ -1,5 +1,7 @@
 #!/bin/bash
-
-cd /Users/haadi/Desktop/ASE-22/Control/webpage-crawler-extension/server &&  node server.js&
-cd /Users/haadi/Desktop/ASE-22/MixScripts/webpage-crawler-extension/server && node server.js&
-cd /Users/haadi/Desktop/ASE-22/MixMethods/webpage-crawler-extension/server && node server.js&
+cd  Control/webpage-crawler-extension/server && node server.js&
+cd  ALL/webpage-crawler-extension/server && node server.js&
+cd  TS/webpage-crawler-extension/server && node server.js&
+cd  MS/webpage-crawler-extension/server && node server.js&
+cd  TMS/webpage-crawler-extension/server && node server.js&
+cd  TM/webpage-crawler-extension/server && node server.js

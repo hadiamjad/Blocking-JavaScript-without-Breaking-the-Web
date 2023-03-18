@@ -1,1 +1,0 @@
-[{'level': 'INFO', 'message': 'https://docrdsfx76ssb.cloudfront.net/static/1672947314/pages/wp-content/themes/JointsWP-CSS-master/assets/scripts/jquery.min.js 6:708 "JQMIGRATE: Migrate is installed, version 3.3.2"', 'source': 'console-api', 'timestamp': 1673462752968}]

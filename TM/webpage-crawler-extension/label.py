@@ -198,9 +198,9 @@ def main():
         "server/output"
     )
     count = 0
-    try:
-        for f in fold:
-                print(f)
+    for f in fold:
+        try:
+                print("labelling:",f)
                 intilization(
                     "server/output/"
                     + f
@@ -209,9 +209,9 @@ def main():
                     + f
                     + "/",
                 )
-    except:
-        count +=1
-        print(count)
+        except:
+            count +=1
+            print(count)
 
 
 main()

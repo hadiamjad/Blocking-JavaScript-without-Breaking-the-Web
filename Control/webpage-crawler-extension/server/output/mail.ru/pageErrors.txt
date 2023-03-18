@@ -1,1 +1,0 @@
-[{'level': 'WARNING', 'message': "https://mail.ru/ - The resource https://r.mradx.net/img/BD/90AFC9.png was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.", 'source': 'javascript', 'timestamp': 1673462516635}]

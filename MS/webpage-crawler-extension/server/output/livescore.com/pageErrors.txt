@@ -1,1 +1,0 @@
-[{'level': 'SEVERE', 'message': 'https://www.livescore.com/_next/static/chunks/main-379cb5b40e107b7e.js - Failed to load resource: net::ERR_BLOCKED_BY_CLIENT', 'source': 'network', 'timestamp': 1672725703046}]

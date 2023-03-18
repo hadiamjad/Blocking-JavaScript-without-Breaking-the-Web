@@ -1,1 +1,0 @@
-[{'level': 'DEBUG', 'message': 'https://www.instagram.com/ - [DOM] Input elements should have autocomplete attributes (suggested: "current-password"): (More info: https://goo.gl/9p2vKq) %o', 'source': 'recommendation', 'timestamp': 1673462212485}]

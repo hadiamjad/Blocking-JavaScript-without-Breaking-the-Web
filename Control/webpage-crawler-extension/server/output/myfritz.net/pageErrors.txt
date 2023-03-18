@@ -1,1 +1,0 @@
-[{'level': 'WARNING', 'message': 'https://sso.myfritz.net/ - [.WebGL-0x3bc4012de200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels', 'source': 'rendering', 'timestamp': 1673462741892}]

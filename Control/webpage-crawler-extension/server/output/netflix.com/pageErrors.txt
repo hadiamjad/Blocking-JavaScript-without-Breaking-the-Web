@@ -1,1 +1,0 @@
-[{'level': 'SEVERE', 'message': "https://www.netflix.com/ - Refused to apply style from 'https://www.netflix.com/personalization/cl2/freeform/WebsiteDetect?source=wwwhead&fetchType=css&modalView=nmLanding' because its MIME type ('') is not a supported stylesheet MIME type, and strict MIME checking is enabled.", 'source': 'security', 'timestamp': 1673462185546}]

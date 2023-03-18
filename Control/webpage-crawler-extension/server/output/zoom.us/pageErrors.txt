@@ -1,1 +1,0 @@
-[{'level': 'WARNING', 'message': 'https://static.ada.support/embed2.baf68c5.js 1:64300 "Ada Embed - Sorry, please turn on the web chat integration in your bot\'s settings."', 'source': 'console-api', 'timestamp': 1673462610659}]

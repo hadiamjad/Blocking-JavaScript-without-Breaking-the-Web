@@ -1,1 +1,0 @@
-[{'level': 'SEVERE', 'message': 'chrome-error://chromewebdata/ - Failed to load resource: the server responded with a status of 404 ()', 'source': 'network', 'timestamp': 1673462847655}, {'level': 'WARNING', 'message': 'chrome-error://chromewebdata/ 6776:10 "crbug/1173575, non-JS module files deprecated."', 'source': 'console-api', 'timestamp': 1673462847683}]

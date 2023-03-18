@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)https://uiowa-irl.github.io/Khaleesi/ -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Blocking JavaScript without Breaking the Web</title>
+<meta name="generator" content="Jekyll v3.9.2">
+<meta property="og:title" content="Blocking JavaScript without Breaking the Web">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Artifact release for Blocking JavaScript without Breaking the Web">
+<meta property="og:description" content="Artifact release for Blocking JavaScript without Breaking the Web">
+<link rel="canonical" href="https://uiowa-irl.github.io/Khaleesi/">
+<meta property="og:url" content="https://uiowa-irl.github.io/Khaleesi/">
+<meta property="og:site_name" content="Blocking JavaScript without Breaking the Web">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Blocking JavaScript without Breaking the Web">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"Artifact release for Blocking JavaScript without Breaking the Web","headline":"Blocking JavaScript without Breaking the Web","name":"Blocking JavaScript without Breaking the Web","url":"https://uiowa-irl.github.io/Khaleesi/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link rel="preload" href="./Blocking-JS-without-breaking-Web/css" as="style" type="text/css" crossorigin="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="./Blocking-JS-without-breaking-Web/style.css">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/Khaleesi/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script></head>
+  <body data-new-gr-c-s-check-loaded="14.1101.0" data-gr-ext-installed="">
+    <a id="skip-to-content" href="https://uiowa-irl.github.io/Khaleesi/#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner">
+      <h1 class="project-name">Blocking JavaScript without Breaking the Web</h1>
+      <h2 class="project-tagline">Artifact release for Blocking JavaScript without Breaking the Web</h2>
+      
+        <a href="https://github.com/uiowa-irl/Khaleesi" class="btn">View on GitHub</a>
+      
+      
+    </header>
+
+    <main id="content" class="main-content" role="main">
+      <h1 id="khaleesi">Blocking JavaScript without Breaking the Web</h1>
+<p>Artifact release for PETS, 2023 paper entitled Blocking JavaScript without Breaking the Web</p>
+
+<h2 id="training--testing-ml-model">JavaScript Corpus Collection</h2>
+
+<!-- <h3 id="data-collection">Data collection</h3> -->
+<p>We use <a href="https://developer.chrome.com/docs/extensions/reference/devtools_network/">Chrome Extension</a> to collect HTTP and JavaScript request chains. You may conduct a new crawl or use the homepage crawl of sample 10 websites in <a href="https://github.com/uiowa-irl/Khaleesi/blob/main/data/non-interactive-crawl.7z">data</a>. The remaining data sets used in the paper are available on <a href="https://zenodo.org/record/7374344">Zenodo</a>.</p>
+<p>For each webpage, our crawler outputs a JSON file that maps
+  each network request to its initiator script and method .
+  We then label each network request and its initiator code (e.g., JS
+  script and methods) as tracking or functional using filter lists.</p>
+
+<h2 id="feature-extraction-and-transformation"> Localizing Tracking and Functional JS Code</h2>
+<p>We adapt SBFL to localize tracking code units (i.e., scripts, methods). We analyze each network request and the methods and scripts in the call stack trace of the network request. We use filter lists to classify a request (and
+  its call stack) as tracking and functional. We then calculate “tracking score” for
+  each code unit (i.e., script or method) based on its participation in
+  the call stack trace of tracking and functional requests</p>
+  <img src="Blocking-JS-without-breaking-Web\webcheck.png" alt="Italian Trulli">
+<h3 id="training-the-model">JS Blocking Impact Analysis</h3>
+<p>We conduct blocking analysis in six
+  parallel configurations shown in the Table below. These configurations are
+ inspired by unique
+ JS blocking strategies that are mostly in practice or proposed by
+  prior work. Control configuration (CTRL) is used to localize JS code
+  units (scripts and methods) using the aforementioned SBFL tech-
+  nique and for breakage comparison in the later subsection. In ALL,
+  all scripts (tracking, mixed, and functional) are blocked to evaluate
+  blanket JS blocking. This configuration represents NoScript, which
+  blocks all scripts by default. In TS, tracking scripts are blocked to evaluate selective JS blocking. This configuration represents ma-
+  jority of content blockers such as uBlock Origin , Brave,
+  and Adblock Plus that use EasyListand EasyPrivacy . In
+  MS, mixed scripts are blocked to see its adverse consequence on
+  functionality. In TMS, tracking and mixed scripts are blocked to eval-
+  uate tracking and mixed JS blocking. TMS is the optimum choice for
+  content blockers in tracking prevention, but it risks functionality
+  breakage. Finally, we compare the results
+  of TMS with TM, where we block tracking methods (all located in
+  tracking and mixed scripts) to evaluate method-level JS blocking.</p>
+  <img src="Blocking-JS-without-breaking-Web\Table.png" alt="Italian Trulli">
+
+<h3 id="testing-the-model">Installation</h3>
+<p>We use provide complete installation set up for our tool in this <a href="https://github.com/uiowa-irl/Khaleesi/blob/main/code/cookie_syncing_heuristic.ipynb">file</a>.</p>
+
+<h2 id="reference">Reference</h2>
+
+<p><strong>Blocking JavaScript without Breaking the Web</strong><br>
+Abdul Haddi Amjad, Zubair Shafiq, Muhammad Ali Gulzar<br>
+<em>Proceedings on Privacy Enhancing Technologies Symposium (PETS), 2023</em></p>
+
+<p><strong>Abstract</strong> Modern websites heavily rely on JavaScript (JS) to implement le-
+  gitimate functionality as well as privacy-invasive advertising and
+  tracking. Browser extensions such as NoScript block any script
+  not loaded by a trusted list of endpoints, thus hoping to block
+  privacy-invasive scripts while avoiding breaking legitimate website
+  functionality. In this paper, we investigate whether blocking JS on
+  the web is feasible without breaking legitimate functionality. To this
+  end, we conduct a large-scale measurement study of JS blocking on
+  100K websites. We evaluate the effectiveness of different JS block-
+  ing strategies in tracking prevention and functionality breakage.
+  Our evaluation relies on quantitative analysis of network requests,
+  and resource loads as well as manual qualitative analysis of visual
+  breakage. First, we show that while blocking all scripts is quite effec-
+  tive at reducing tracking, it significantly degrades functionality on
+  approximately two-thirds of the tested websites. Second, we show
+  that selective blocking of a subset of scripts based on a curated list
+  achieves a better tradeoff. However, there remain approximately
+  15% “mixed” scripts, which essentially merge tracking and legit-
+  imate functionality and thus cannot be blocked without causing
+  website breakage. Finally, we show that fine-grained blocking of
+  a subset of JS methods, instead of scripts, reduces major breakage
+  by 3.7× while providing the same level of tracking prevention. Our
+  work highlights the promise and open challenges in fine-grained
+  JS blocking for tracking prevention without breaking the web.</p>
+
+<p><strong>For more details please check our <a href="https://arxiv.org/pdf/2302.01182.pdf">full paper</a></strong></p>
+
+<h3 id="citation">Citation</h3>
+<p>If you use code/data in your research, please cite Blocking JavaScript without Breaking the Web as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@inproceedings{Amjad22PETSBlockingJSWithoutBreakingWeb,
+  title     = {Blocking JavaScript without Breaking the Web},
+  author    = {Abdul Haddi Amjad, Zubair Shafiq, Muhammad Ali Gulzar},
+  booktitle = {Proceedings on Privacy Enhancing Technologies Symposium (PETS)},
+  year      = {2023}
+}
+</code></pre></div></div>
+
+<h2 id="contact">Contact</h2>
+
+<p><em>Please contact <a href="https://hadiamjad.github.io/">Hadi Amjad</a>  if you run into any problems running the code or if you have any questions.</em></p>
+
+    </main>
+  
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>

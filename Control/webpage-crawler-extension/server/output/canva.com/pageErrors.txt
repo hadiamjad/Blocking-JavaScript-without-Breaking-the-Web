@@ -1,1 +1,0 @@
-[{'level': 'WARNING', 'message': 'https://static.canva.com/static/lib/sentry/7.16.0.min.js 1:5797 "Reddit Pixel Warning:pixel has already been initialized"', 'source': 'console-api', 'timestamp': 1673463989521}]
