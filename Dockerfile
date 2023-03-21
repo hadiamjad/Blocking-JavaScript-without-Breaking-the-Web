@@ -12,6 +12,7 @@ RUN pip3 install tldextract
 RUN pip3 install webdriver-manager
 RUN pip3 install matplotlib
 RUN pip3 install xlrd
+RUN pip3 install beautifulsoup4
 
 RUN apt-get update
 RUN apt install -y nodejs
