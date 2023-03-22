@@ -13,13 +13,13 @@ In this paper we propose three step process:
 2. Localizing Tracking and Functional JS Code: We use previously labelled dataset to generate spectra of entites (script and methods) using spectra-based fault localization.
 ![webcheck](ScreenShots/webcheck.png)
 3. JS Blocking Impact Analysis: Eeventually we use the annotated spectra of entities to try different JS blocking strategies. 
-![configs](ScreenShots/table.png)
+![configs](ScreenShots/Table.png)
 4. We report (1) network request count and (2) missing functional tag URLs as a breakage metric.
 ![breakage](ScreenShots/breakage.png)
 ## Installation
 
 #### 1. Clone the the github repository
-``
+`git clone https://github.com/hadiamjad/Blocking-JavaScript-without-Breaking-the-Web.git` and move in the directory using `cd` command
 #### 2. Build the docker using Dockerfile
 - This command `docker build -t blockingjs .` will build docker image using Dockerfile.
 ![docker-build](ScreenShots/1.png)
