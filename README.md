@@ -51,35 +51,35 @@ Some important commands:
 ###### Testing `ALL` configuration
 - Staying inside `client` session, run `cd ../../` to go back in the main directory.
 - Go inside `cd ALL/webpage-crawler-extension` and run `./client.sh` This will crawl the landing pages of websites(from previous step) in ALL setting(all tracking, functional and mixed scripts are blocked). This step will crawl the websites, then label it using filter lists, print the number of tracking and functional requests count in ALL setting. 
-### Note last two lines report the raw numbers (1) network request count and (2) missing functional tag URLs as a breakage metric. These numbers may vary from screenshot due to dynamic nature of website
+> Note last two lines report the raw numbers (1) network request count and (2) missing functional tag URLs as a breakage metric. These numbers may vary from screenshot due to dynamic nature of website
 The output will look like this(number may vary due to dynamic nature of websites):
 ![All](ScreenShots/5.png)
 
 ###### Testing `TS` configuration
 - Staying inside `client` session, run `cd ../../` to go back in the main directory.
 - Go inside `cd TS/webpage-crawler-extension` and run `./client.sh` This will crawl the landing pages of websites(from Control setting) using chrome extension configured with TS setting where all tracking scripts are blocked. Then label it using filter lists, and print the number of tracking and functional requests count in TS setting. 
-### Note last two lines report the raw numbers of (1) network request count and (2) missing functional tag URLs as a breakage metric. These numbers may vary from screenshot due to dynamic nature of website
+> Note last two lines report the raw numbers of (1) network request count and (2) missing functional tag URLs as a breakage metric. These numbers may vary from screenshot due to dynamic nature of website
 The output will look like this(number may vary due to dynamic nature of websites):
 ![ts](ScreenShots/6.png)
 
 ###### Testing `MS` configuration
 - Staying inside `client` session, run `cd ../../` to go back in the main directory.
 - Go inside `cd MS/webpage-crawler-extension` and run `./client.sh` This will crawl the landing pages of websites(from Control setting) using chrome extension configured with MS setting where all mixed scripts are blocked. Then label it using filter lists, and print the number of tracking and functional requests count in MS setting. 
-### Note last two lines report the raw numbers of (1) network request count and (2) missing functional tag URLs as a breakage metric. These numbers may vary from screenshot due to dynamic nature of website
+> Note last two lines report the raw numbers of (1) network request count and (2) missing functional tag URLs as a breakage metric. These numbers may vary from screenshot due to dynamic nature of website
 The output will look like this(number may vary due to dynamic nature of websites):
 ![ts](ScreenShots/7.png)
 
 ###### Testing `TMS` configuration
 - Staying inside `client` session, run `cd ../../` to go back in the main directory.
 - Go inside `cd TMS/webpage-crawler-extension` and run `./client.sh` This will crawl the landing pages of websites(from Control setting) using chrome extension configured with TMS setting where all tracking scripts and mixed scripts are blocked. Then label it using filter lists, and print the number of tracking and functional requests count in TMS setting. 
-### Note last two lines report the raw numbers of (1) network request count and (2) missing functional tag URLs as a breakage metric. These numbers may vary from screenshot due to dynamic nature of website
+> Note last two lines report the raw numbers of (1) network request count and (2) missing functional tag URLs as a breakage metric. These numbers may vary from screenshot due to dynamic nature of website
 The output will look like this(number may vary due to dynamic nature of websites):
 ![tms](ScreenShots/8.png)
 
 ###### Testing `TM` configuration
 - Staying inside `client` session, run `cd ../../` to go back in the main directory.
 - Go inside `cd TM/webpage-crawler-extension` and run `./client.sh` This will crawl the landing pages of websites(from Control setting) using chrome extension configured with TM setting where all tracking methods are blocked. Then label it using filter lists, and print the number of tracking and functional requests count in TM setting. 
-### Note last two lines report the raw numbers of (1) network request count and (2) missing functional tag URLs as a breakage metric. These numbers may vary from screenshot due to dynamic nature of website
+> Note last two lines report the raw numbers of (1) network request count and (2) missing functional tag URLs as a breakage metric. These numbers may vary from screenshot due to dynamic nature of website
 The output will look like this(number may vary due to dynamic nature of websites):
 ![tm](ScreenShots/9.png)
 
@@ -104,4 +104,5 @@ The output will look like this(number may vary due to dynamic nature of websites
 You can run the following command to copy the folder to local to view it using this command
 `docker cp {container_id}:/Crawler/Figures .`. For example in my case the container id is located on the docker shell
 ![tm](ScreenShots/container.png)
+
 `docker cp  7c486e87b63a:/Crawler/Figures .`
