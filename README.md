@@ -165,7 +165,7 @@ You can run the following command in LOCAL REPOSITORY SHELL to copy the Figures 
 
 `docker cp {container_id}:/Crawler/Figures .` 
 
-In my case the container id is located on the docker shell
+The container id is located on the docker shell
 ![tm](ScreenShots/container.png)
 
 `docker cp  7c486e87b63a:/Crawler/Figures .`
