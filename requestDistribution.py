@@ -57,8 +57,7 @@ def countDistribution(experiment):
     sns.displot(df, x="Value", hue="Function", multiple="dodge",palette = colors, bins=10)   
     plt.show()
     plt.savefig('Figures/DistributionPlot.pdf')
-    return website
 
 def main():
-    print(countDistribution(sys.argv[1]))
+    countDistribution(sys.argv[1])
 main()

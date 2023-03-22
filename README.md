@@ -35,16 +35,19 @@ Some important commands:
 - To join existing session`tmux a -t {session-name}`
 
 ### 4. Running above methodology
+
 ##### Step 1: Run servers for all configurations
 - Make sure your docker build was successful and you are inside docker container after running `step 2` and `ls` command shows the content of this repository.
 - Create new tmux session for running all server `tmux new -s server`. This will automatically join the session as well.
 - Run the following command `./server.sh` this will start all servers for different configurations.
 ![server](ScreenShots/3.png)
 - Leave the `server` session using `Cntrl + b` followed by `d`.
+
 ##### Step 2: Running JavaScript Corpus Collection & Localizing Tracking and Functional JS Code
 - Create new tmux session for running `JavaScript Corpus Collection & Localizing Tracking and Functional JS Code` using this `tmux new -s client` command. This will automatically join the session as well.
-- Now run `cd Control/webpage-crawler-extension` and then once you are inside the directory, simply run `./client.sh` to start crawler. This will crawl the landing pages of 10 sample websites [link here]. This step will first crawl the all websites, then label it using filter lists, print the number of tracking and functional requests count in control setting, eventually run SBFL.py to create spectra of entites with tracking score for other configurations. Once all steps are complete the output will look like this:
+- Now run `cd Control/webpage-crawler-extension` and then once you are inside the directory, simply run `./client.sh` to start crawler.  It involves crawlling the landing pages of 10 sample websites listed in 'Control\webpage-crawler-extension\csv\test.csv', then label it using filter lists, print the number of tracking and functional requests count in control setting, eventually run SBFL.py to generate tracking score for other configurations. Once all steps are complete the output will look like this:
 ![Control](ScreenShots/4.png)
+
 ##### Step 3: Running JS Blocking Impact Analysis
 - Using the same tmux session i.e `client`, you can test other configurations. 
 

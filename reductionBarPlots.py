@@ -18,72 +18,48 @@ def getInitiatorURL(stack):
 def extractDigits(lst):
     return list(map(lambda el: [el], lst))
 
-def countRequests(experiment):
-    df1 = pd.DataFrame(extractDigits(os.listdir(''+experiment+'/webpage-crawler-extension/server/output')), columns=['website'])
-    fold = ''+experiment+'/webpage-crawler-extension/'
-    tracking = 0
-    functional = 0
-    for j in df1.index:
-        try:
-            df = pd.read_json(fold + 'server/output/' + df1["website"][j] + '/label_request.json') 
-            res = pd.read_json(fold +'server/output/' + df1["website"][j] + '/responses.json', lines=True)    
-            for i in df.index:
-                if checkResExist(res, df["request_id"][i]):
-                    if (df["easylistflag"][i] == 1 or df["easyprivacylistflag"][i] == 1 or df["ancestorflag"][i] == 1):
-                            tracking +=1
-                    else:
-                            functional +=1
-        except:
-                pass
-
-    return tracking,functional
-
 def countDistribution(experiment):
     df1 = pd.DataFrame(extractDigits(os.listdir(''+experiment+'/webpage-crawler-extension/server/output')), columns=['website'])
     fold = ''+experiment+'/webpage-crawler-extension/'
-    tracking = 0
-    functional = 0
     website = {}
     for j in df1.index:
         if df1["website"][j] not in website:
-            website[df1["website"][j]] = [(0,0), (0,0)]
-        try:
-            df = pd.read_json(fold + 'server/output/' + df1["website"][j] + '/label_request.json') 
-            res = pd.read_json(fold +'server/output/' + df1["website"][j] + '/responses.json', lines=True)    
-            for i in df.index:
-                if checkResExist(res, df["request_id"][i]):
-                    if (df["easylistflag"][i] == 1 or df["easyprivacylistflag"][i] == 1 or df["ancestorflag"][i] == 1):
-                        website[df1["website"][j]][0][0] +=1
-                    else:
-                        website[df1["website"][j]][0][1] +=1
-            df = pd.read_json('ALL/webpage-crawler-extension/server/output/' + df1["website"][j] + '/label_request.json')   
-            for i in df.index:
+            website[df1["website"][j]] = [0,0,0,0]
+        # try:
+        df = pd.read_json(fold + 'server/output/' + df1["website"][j] + '/label_request.json') 
+        res = pd.read_json(fold +'server/output/' + df1["website"][j] + '/responses.json', lines=True)    
+        for i in df.index:
+            if checkResExist(res, df["request_id"][i]):
                 if (df["easylistflag"][i] == 1 or df["easyprivacylistflag"][i] == 1 or df["ancestorflag"][i] == 1):
-                    website[df1["website"][j]][1][0] +=1
+                    website[df1["website"][j]][0] +=1
                 else:
-                    website[df1["website"][j]][1][0] +=1
-        except:
-                pass
+                    website[df1["website"][j]][1] +=1
+        df = pd.read_json('Control/webpage-crawler-extension/server/output/' + df1["website"][j] + '/label_request.json')   
+        for i in df.index:
+            if (df["easylistflag"][i] == 1 or df["easyprivacylistflag"][i] == 1 or df["ancestorflag"][i] == 1):
+                website[df1["website"][j]][2] +=1
+            else:
+                website[df1["website"][j]][3] +=1
+        # except:
+        #         pass
+    data = {
+    'Website': list(website.keys()),
+    'Tracking': [(item[2]-item[0])*100/item[2] for item in website.values()],
+    'Functional': [(item[3]-item[1])*100/item[3] for item in website.values()]
+    }
 
-    return tracking,functional
+    # create a pandas dataframe from the dictionary
+    df = pd.DataFrame(data)
+    # avg = df[['Tracking', 'Functional']].mean(axis=1)
+    #print(df['Tracking'].mean())
+    data = {
+    'experiment': experiment,
+    'tracking': df['Tracking'].mean(),
+    'functional': df['Functional'].mean()
+    }
+    # create a pandas dataframe from the dictionary
+    df = pd.DataFrame([data])
 
-def main():
-    if sys.argv[2] != "None":
-        data = {
-            "Control": countRequests("Control"),
-            sys.argv[1]: countRequests(sys.argv[1]),
-            sys.argv[2]: countRequests(sys.argv[2])
-            }
-    else:
-         data = {
-            "Control": countRequests("Control"),
-            sys.argv[1]: countRequests(sys.argv[1])
-            }
-    # Create DataFrame     
-    df = pd.DataFrame(data.items(), columns=['experiment', 'tracking, functional'])
-    df[['tracking', 'functional']] = pd.DataFrame(df['tracking, functional'].tolist(), index=df.index)
-    df = df[['experiment', 'tracking', 'functional']]
-    
     # Plot
     colors = ['#E11916', '#3FD72D']
     ax = df.plot(kind='bar', x='experiment', y=['tracking', 'functional'], color=colors, rot=0)
@@ -91,4 +67,7 @@ def main():
     ax.set_ylabel('Value')
     plt.show()
     plt.savefig('Figures/ReductionPlot.pdf')
+
+def main():
+    countDistribution(sys.argv[1])
 main()
