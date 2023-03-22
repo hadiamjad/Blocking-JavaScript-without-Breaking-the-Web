@@ -58,9 +58,14 @@ Some important commands:
 - Leave the `server` session using `Cntrl + b` followed by `d`.
 
 ##### Step 2: Running JavaScript Corpus Collection & Localizing Tracking and Functional JS Code
+
+#### Make sure you have stable internet otherwise it might end up with error
+![server](ScreenShots/internet.png)
+
 - Create new tmux session for running **JavaScript Corpus Collection & Localizing Tracking and Functional JS Code** using this `tmux new -s client` command. This will automatically join the session as well.
 
 - Now run `cd Control/webpage-crawler-extension` and then once you are inside the directory, simply run `bash client.sh` to start crawler.  
+
 
 It involves crawlling the landing pages of 10 sample websites listed in 'Control\webpage-crawler-extension\csv\test.csv', then label it using filter lists, print the number of tracking and functional requests count in control setting, eventually run SBFL.py to generate tracking score for other configurations.
 
@@ -144,9 +149,11 @@ The output will look like this(number may vary due to dynamic nature of websites
 - This will generate plot pdf in `Figures/BarPlot.pd` 
 
 #### Retrieving Figures folder on local to view it
-You can run the following command in LOCAL REPOSITORY SHELL to copy the folder to local to view it using this command
+You can run the following command in LOCAL REPOSITORY SHELL to copy the Figures folder to local machine:
 
-`docker cp {container_id}:/Crawler/Figures .`. In my case the container id is located on the docker shell
+`docker cp {container_id}:/Crawler/Figures .` 
+
+In my case the container id is located on the docker shell
 ![tm](ScreenShots/container.png)
 
 `docker cp  7c486e87b63a:/Crawler/Figures .`
