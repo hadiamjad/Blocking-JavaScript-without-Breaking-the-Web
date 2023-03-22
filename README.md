@@ -10,18 +10,21 @@ This repository provides the complete instrumentation to evaluate different JS b
 ## Methodology
 In this paper we propose three step process:
 1. JavaScript Corpus Collection:  In process we crawl landing pages of websites using chrome extension to capture network requests and its associated call stacks. Then, each request is labeled using Filter Lists. 
-
 2. Localizing Tracking and Functional JS Code: We use previously labelled dataset to generate spectra of entites (script and methods) using spectra-based fault localization.
-
-3. JS Blocking Impact Analysis: Eeventually we use the annotated spectra of entities to try different JS blocking strategies. We report network request count and missing functional tag URLs as a breakage metric.
-
+![webcheck](ScreenShots/webcheck.png)
+3. JS Blocking Impact Analysis: Eeventually we use the annotated spectra of entities to try different JS blocking strategies. 
+![configs](ScreenShots/table.png)
+4. We report (1) network request count and (2) missing functional tag URLs as a breakage metric.
+![breakage](ScreenShots/breakage.png)
 ## Installation
 
 #### 1. Clone the the github repository
 ``
 #### 2. Build the docker using Dockerfile
-- This command `docker build -t BlockingJS .` will build docker image using Dockerfile.
-- Run the docker image using `docker run -it BlockingJS`.
+- This command `docker build -t blockingjs .` will build docker image using Dockerfile.
+![docker-build](ScreenShots/1.png)
+- Run the docker image using `docker run -it blockingjs`
+![docker-run](ScreenShots/2.png)
 - Try running `ls` command in the docker terminal and it will list all the files inside this repository.
 
 #### 3. Tmux session (You can skip this step if you are already familiar with tmux)
@@ -36,49 +39,60 @@ Some important commands:
 - Make sure your docker build was successful and you are inside docker container after running `step 2` and `ls` command shows the content of this repository.
 - Create new tmux session for running all server `tmux new -s server`. This will automatically join the session as well.
 - Run the following command `./server.sh` this will start all servers for different configurations.
-> hadi add image
+![server](ScreenShots/3.png)
 - Leave the `server` session using `Cntrl + b` followed by `d`.
-> hadi add image
 ##### Step 2: Running JavaScript Corpus Collection & Localizing Tracking and Functional JS Code
 - Create new tmux session for running `JavaScript Corpus Collection & Localizing Tracking and Functional JS Code` using this `tmux new -s client` command. This will automatically join the session as well.
-> add image
 - Now run `cd Control/webpage-crawler-extension` and then once you are inside the directory, simply run `./client.sh` to start crawler. This will crawl the landing pages of 10 sample websites [link here]. This step will first crawl the all websites, then label it using filter lists, print the number of tracking and functional requests count in control setting, eventually run SBFL.py to create spectra of entites with tracking score for other configurations. Once all steps are complete the output will look like this:
-> hadi add image
+![Control](ScreenShots/4.png)
 ##### Step 3: Running JS Blocking Impact Analysis
 - Using the same tmux session i.e `client`, you can test other configurations. 
+- In each configuration (1) network request count and (2) missing functional tag URLs as a breakage metric on the last two lines of the cosole.
 ###### Testing `ALL` configuration
 - Staying inside `client` session, run `cd ../../` to go back in the main directory.
 - Go inside `cd ALL/webpage-crawler-extension` and run `./client.sh` This will crawl the landing pages of websites(from previous step) in ALL setting(all tracking, functional and mixed scripts are blocked). This step will crawl the websites, then label it using filter lists, print the number of tracking and functional requests count in ALL setting. 
 the output will look like this(number may vary due to dynamic nature of websites):
-> hadi add image
-###### Testing `ALL` configuration
-- Staying inside `client` session, run `cd ../../` to go back in the main directory.
-- Go inside `cd ALL/webpage-crawler-extension` and run `./client.sh` This will crawl the landing pages of websites(from Control setting) using chrome extension configured with ALL setting where all tracking, functional and mixed scripts are blocked. Then label it using filter lists, and print the number of tracking and functional requests count in ALL setting. 
-The output will look like this(number may vary due to dynamic nature of websites):
-> hadi add image
+![All](ScreenShots/5.png)
 
 ###### Testing `TS` configuration
 - Staying inside `client` session, run `cd ../../` to go back in the main directory.
 - Go inside `cd TS/webpage-crawler-extension` and run `./client.sh` This will crawl the landing pages of websites(from Control setting) using chrome extension configured with TS setting where all tracking scripts are blocked. Then label it using filter lists, and print the number of tracking and functional requests count in TS setting. 
 The output will look like this(number may vary due to dynamic nature of websites):
-> hadi add image
+![ts](ScreenShots/6.png)
 
 ###### Testing `MS` configuration
 - Staying inside `client` session, run `cd ../../` to go back in the main directory.
 - Go inside `cd MS/webpage-crawler-extension` and run `./client.sh` This will crawl the landing pages of websites(from Control setting) using chrome extension configured with MS setting where all mixed scripts are blocked. Then label it using filter lists, and print the number of tracking and functional requests count in MS setting. 
 The output will look like this(number may vary due to dynamic nature of websites):
-> hadi add image
+![ts](ScreenShots/7.png)
 
 ###### Testing `TMS` configuration
 - Staying inside `client` session, run `cd ../../` to go back in the main directory.
 - Go inside `cd TMS/webpage-crawler-extension` and run `./client.sh` This will crawl the landing pages of websites(from Control setting) using chrome extension configured with TMS setting where all tracking scripts and mixed scripts are blocked. Then label it using filter lists, and print the number of tracking and functional requests count in TMS setting. 
 The output will look like this(number may vary due to dynamic nature of websites):
-> hadi add image
+![tms](ScreenShots/8.png)
 
 ###### Testing `TM` configuration
 - Staying inside `client` session, run `cd ../../` to go back in the main directory.
 - Go inside `cd TM/webpage-crawler-extension` and run `./client.sh` This will crawl the landing pages of websites(from Control setting) using chrome extension configured with TM setting where all tracking methods are blocked. Then label it using filter lists, and print the number of tracking and functional requests count in TM setting. 
 The output will look like this(number may vary due to dynamic nature of websites):
-> hadi add image
+![tm](ScreenShots/9.png)
 
 ### 5. Generating figures
+#### Generating `Number of Request` figures for all RQ's
+- You can simply run the following command: `python -W ignore requestCountBarPlots.py {Configuration 1} {Configuration 2}` --- here `{Configuration 1}`and `{Configuration 2}` are placeholders. For example, if you want to create for RQ4 you can run following command:
+ `python -W ignore requestCountBarPlots.py TMS TM`
+- This will generate plot pdf in `Figures/BarPlot.pd` 
+> Note you can try TS MS for RQ2
+
+#### Generating `% Reduction` figures for all RQ's
+- You can simply run the following command: `python -W ignore reductionBarPlots.py {Configuration 1} {Configuration 2}` --- here `{Configuration 1}` and `{Configuration 2}` are placeholders. For example, if you want to create for RQ4 you can run following command:
+ `python -W ignore requestCountBarPlots.py TMS TM`
+- This will generate plot pdf in `Figures/BarPlot.pd` 
+
+#### Generating `Distribution Plots` figures for all RQ's
+- You can simply run the following command: `python -W ignore requestDistriution.py {Configuration 1}` --- here `{Configuration 1}` is placeholders. For example, if you want to create for RQ2 you can run following command:
+ `python -W ignore requestCountBarPlots.py TMS`
+- This will generate plot pdf in `Figures/BarPlot.pd` 
+
+#### Retrieving Figures folder on local to view it

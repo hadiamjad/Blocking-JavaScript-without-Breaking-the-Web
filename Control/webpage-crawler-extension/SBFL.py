@@ -94,7 +94,6 @@ def getScriptsMethods():
     fold = os.listdir(path)
     for f in fold:
         if os.path.isfile(path + "/" + f + "/label_request.json"):
-                print(f)
                 df = pd.read_json(path + "/" + f + "/label_request.json")
                 website.append(df.loc[0, "http_req"])
                 for index, dataset in df.iterrows():
@@ -160,7 +159,6 @@ def getScriptsMethods():
     
     for f in fold:
         if os.path.isfile(path + "/" + f + "/label_request.json"):
-                print(f)
                 df = pd.read_json(path + "/" + f + "/label_request.json")
                 for index, dataset in df.iterrows():
                     if dataset["call_stack"]["type"] == "script":
