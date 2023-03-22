@@ -49,7 +49,7 @@ Some important commands:
 
 - Create new tmux session for running all server `tmux new -s server`. This will automatically join the session as well.
 
-- Run the following command `./server.sh` this will start all servers for different configurations.
+- Run the following command `bash server.sh` this will start all servers for different configurations.
 ![server](ScreenShots/3.png)
 
 - Leave the `server` session using `Cntrl + b` followed by `d`.
@@ -57,7 +57,7 @@ Some important commands:
 ##### Step 2: Running JavaScript Corpus Collection & Localizing Tracking and Functional JS Code
 - Create new tmux session for running **JavaScript Corpus Collection & Localizing Tracking and Functional JS Code** using this `tmux new -s client` command. This will automatically join the session as well.
 
-- Now run `cd Control/webpage-crawler-extension` and then once you are inside the directory, simply run `./client.sh` to start crawler.  
+- Now run `cd Control/webpage-crawler-extension` and then once you are inside the directory, simply run `bash client.sh` to start crawler.  
 
 It involves crawlling the landing pages of 10 sample websites listed in 'Control\webpage-crawler-extension\csv\test.csv', then label it using filter lists, print the number of tracking and functional requests count in control setting, eventually run SBFL.py to generate tracking score for other configurations.
 
@@ -69,7 +69,7 @@ Once all steps are complete the output will look like this:
 
 ###### Testing `ALL` configuration
 - Staying inside `client` session.
-- Go inside `cd ../../ALL/webpage-crawler-extension` and run `./client.sh`.
+- Go inside `cd ../../ALL/webpage-crawler-extension` and run `bash client.sh`.
 
  This will crawl the landing pages of websites(from previous step) in ALL setting(all tracking, functional and mixed scripts are blocked). This step will crawl the websites, then label it using filter lists, print the number of tracking and functional requests count in ALL setting. 
 
@@ -81,7 +81,7 @@ The output will look like this(number may vary due to dynamic nature of websites
 ###### Testing `TS` configuration
 - Staying inside `client` session.
 
-- Go inside `cd ../../TS/webpage-crawler-extension` and run `./client.sh`.
+- Go inside `cd ../../TS/webpage-crawler-extension` and run `bash client.sh`.
 
  This will crawl the landing pages of websites(from Control setting) using chrome extension configured with TS setting where all tracking scripts are blocked. Then label it using filter lists, and print the number of tracking and functional requests count in TS setting. 
 
@@ -92,7 +92,7 @@ The output will look like this(number may vary due to dynamic nature of websites
 
 ###### Testing `MS` configuration
 - Staying inside `client` session.
-- Go inside `cd ../../MS/webpage-crawler-extension` and run `./client.sh`.
+- Go inside `cd ../../MS/webpage-crawler-extension` and run `bash client.sh`.
 
  This will crawl the landing pages of websites(from Control setting) using chrome extension configured with MS setting where all mixed scripts are blocked. Then label it using filter lists, and print the number of tracking and functional requests count in MS setting. 
 
@@ -103,7 +103,7 @@ The output will look like this(number may vary due to dynamic nature of websites
 
 ###### Testing `TMS` configuration
 - Staying inside `client` session.
-- Go inside `cd ../../TMS/webpage-crawler-extension` and run `./client.sh`.
+- Go inside `cd ../../TMS/webpage-crawler-extension` and run `bash client.sh`.
 
  This will crawl the landing pages of websites(from Control setting) using chrome extension configured with TMS setting where all tracking scripts and mixed scripts are blocked. Then label it using filter lists, and print the number of tracking and functional requests count in TMS setting. 
 
@@ -114,7 +114,7 @@ The output will look like this(number may vary due to dynamic nature of websites
 
 ###### Testing `TM` configuration
 - Staying inside `client` session.
-- Go inside `cd ../../TM/webpage-crawler-extension` and run `./client.sh`.
+- Go inside `cd ../../TM/webpage-crawler-extension` and run `bash client.sh`.
 
  This will crawl the landing pages of websites(from Control setting) using chrome extension configured with TM setting where all tracking methods are blocked. Then label it using filter lists, and print the number of tracking and functional requests count in TM setting. 
 
@@ -141,7 +141,7 @@ The output will look like this(number may vary due to dynamic nature of websites
 - This will generate plot pdf in `Figures/BarPlot.pd` 
 
 #### Retrieving Figures folder on local to view it
-You can run the following command to copy the folder to local to view it using this command
+You can run the following command in LOCAL REPOSITORY SHELL to copy the folder to local to view it using this command
 `docker cp {container_id}:/Crawler/Figures .`. For example in my case the container id is located on the docker shell
 ![tm](ScreenShots/container.png)
 
