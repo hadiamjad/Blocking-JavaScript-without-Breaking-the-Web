@@ -7,6 +7,8 @@ The ArXiv version of the manuscript is avaibable at : [Blocking JS without Break
 
 This repository provides the complete instrumentation to evaluate different JS blocking strategies proposed in the paper. 
 
+> This is rigorously tested on Macbook with stable internet connection.
+
 ## Methodology
 In this paper we propose three step process:
 1. **JavaScript Corpus Collection:**  In process we crawl landing pages of websites using chrome extension to capture network requests and its associated call stacks. Then, each request is labeled using Filter Lists.
