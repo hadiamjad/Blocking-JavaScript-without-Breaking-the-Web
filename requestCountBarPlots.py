@@ -87,8 +87,8 @@ def main():
     # Plot
     colors = ['#E11916', '#3FD72D']
     ax = df.plot(kind='bar', x='experiment', y=['tracking', 'functional'], color=colors, rot=0)
-    ax.set_xlabel('Experiment')
-    ax.set_ylabel('Value')
+    ax.set_xlabel('Configuration')
+    ax.set_ylabel('Requests Count')
     plt.show()
     plt.savefig('Figures/BarPlot.pdf')
 main()

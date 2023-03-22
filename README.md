@@ -144,6 +144,7 @@ The output will look like this(number may vary due to dynamic nature of websites
 ![server](ScreenShots/internet.png)
 
 ### 5. Generating figures
+Go back in main directory `cd ../../`
 #### Generating `Number of Request` figures for all RQ's
 - You can simply run the following command: `python -W ignore requestCountBarPlots.py {Configuration 1} {Configuration 2}` --- here `{Configuration 1}`and `{Configuration 2}` are placeholders. For example, if you want to create for RQ4 you can run following command:
  `python -W ignore requestCountBarPlots.py TMS TM`
@@ -153,12 +154,12 @@ The output will look like this(number may vary due to dynamic nature of websites
 #### Generating `% Reduction` figures for all RQ's
 - You can simply run the following command: `python -W ignore reductionBarPlots.py {Configuration 1} {Configuration 2}` --- here `{Configuration 1}` and `{Configuration 2}` are placeholders. For example, if you want to create for RQ4 you can run following command:
  `python -W ignore requestCountBarPlots.py TMS TM`
-- This will generate plot pdf in `Figures/BarPlot.pd` 
+- This will generate plot pdf in `Figures/ReductionPlot.pd` 
 
 #### Generating `Distribution Plots` figures for all RQ's
-- You can simply run the following command: `python -W ignore requestDistriution.py {Configuration 1}` --- here `{Configuration 1}` is placeholders. For example, if you want to create for RQ2 you can run following command:
+- You can simply run the following command: `python -W ignore requestDistribution.py {Configuration 1}` --- here `{Configuration 1}` is placeholders. For example, if you want to create for RQ2 you can run following command:
  `python -W ignore requestCountBarPlots.py TMS`
-- This will generate plot pdf in `Figures/BarPlot.pd` 
+- This will generate plot pdf in `Figures/DistributionPlot.pd` 
 
 #### Retrieving Figures folder on local to view it
 You can run the following command in LOCAL REPOSITORY SHELL to copy the Figures folder to local machine:
