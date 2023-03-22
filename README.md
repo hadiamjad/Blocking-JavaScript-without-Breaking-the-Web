@@ -59,9 +59,6 @@ Some important commands:
 
 ##### Step 2: Running JavaScript Corpus Collection & Localizing Tracking and Functional JS Code
 
-#### Make sure you have stable internet otherwise it might end up with error
-![server](ScreenShots/internet.png)
-
 - Create new tmux session for running **JavaScript Corpus Collection & Localizing Tracking and Functional JS Code** using this `tmux new -s client` command. This will automatically join the session as well.
 
 - Now run `cd Control/webpage-crawler-extension` and then once you are inside the directory, simply run `bash client.sh` to start crawler.  
@@ -71,6 +68,9 @@ It involves crawlling the landing pages of 10 sample websites listed in 'Control
 
 Once all steps are complete the output will look like this:
 ![Control](ScreenShots/4.png)
+
+> Make sure you have stable internet otherwise it might end up with this error
+![server](ScreenShots/internet.png)
 
 ##### Step 3: Running JS Blocking Impact Analysis
 - Using the same tmux session i.e `client`, you can test other configurations. 
@@ -85,6 +85,8 @@ Once all steps are complete the output will look like this:
 
 The output will look like this(number may vary due to dynamic nature of websites):
 ![All](ScreenShots/5.png)
+> Make sure you have stable internet otherwise it might end up with this error
+![server](ScreenShots/internet.png)
 
 ###### Testing `TS` configuration
 - Staying inside `client` session.
@@ -97,6 +99,8 @@ The output will look like this(number may vary due to dynamic nature of websites
 
 The output will look like this(number may vary due to dynamic nature of websites):
 ![ts](ScreenShots/6.png)
+> Make sure you have stable internet otherwise it might end up with this error
+![server](ScreenShots/internet.png)
 
 ###### Testing `MS` configuration
 - Staying inside `client` session.
@@ -108,6 +112,8 @@ The output will look like this(number may vary due to dynamic nature of websites
 
 The output will look like this(number may vary due to dynamic nature of websites):
 ![ts](ScreenShots/7.png)
+> Make sure you have stable internet otherwise it might end up with this error
+![server](ScreenShots/internet.png)
 
 ###### Testing `TMS` configuration
 - Staying inside `client` session.
@@ -119,6 +125,8 @@ The output will look like this(number may vary due to dynamic nature of websites
 
 The output will look like this(number may vary due to dynamic nature of websites):
 ![tms](ScreenShots/8.png)
+> Make sure you have stable internet otherwise it might end up with this error
+![server](ScreenShots/internet.png)
 
 ###### Testing `TM` configuration
 - Staying inside `client` session.
@@ -130,6 +138,8 @@ The output will look like this(number may vary due to dynamic nature of websites
 
 The output will look like this(number may vary due to dynamic nature of websites):
 ![tm](ScreenShots/9.png)
+> Make sure you have stable internet otherwise it might end up with this error
+![server](ScreenShots/internet.png)
 
 ### 5. Generating figures
 #### Generating `Number of Request` figures for all RQ's
