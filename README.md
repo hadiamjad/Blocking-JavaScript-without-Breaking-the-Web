@@ -27,6 +27,9 @@ In this paper we propose three step process:
 
 #### 2. Build the docker using Dockerfile
 
+Make sure Docker has these minimum requirements:
+![docker-build](ScreenShots/docker-requirements.png)
+
 - This command `docker build -t blockingjs .` will build docker image using Dockerfile.
 ![docker-build](ScreenShots/1.png)
 
@@ -45,7 +48,7 @@ Some important commands:
 ### 4. Running above methodology
 
 ##### Step 1: Run servers for all configurations
-> Make sure your docker build was successful and you are inside docker container after running `step 2` and `ls` command shows the content of this repository.
+> Make sure your docker build was successful.
 
 - Create new tmux session for running all server `tmux new -s server`. This will automatically join the session as well.
 
@@ -142,7 +145,8 @@ The output will look like this(number may vary due to dynamic nature of websites
 
 #### Retrieving Figures folder on local to view it
 You can run the following command in LOCAL REPOSITORY SHELL to copy the folder to local to view it using this command
-`docker cp {container_id}:/Crawler/Figures .`. For example in my case the container id is located on the docker shell
+
+`docker cp {container_id}:/Crawler/Figures .`. In my case the container id is located on the docker shell
 ![tm](ScreenShots/container.png)
 
 `docker cp  7c486e87b63a:/Crawler/Figures .`
