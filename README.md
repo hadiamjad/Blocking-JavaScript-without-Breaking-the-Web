@@ -153,12 +153,12 @@ Go back in main directory `cd ../../`
 
 #### Generating `% Reduction` figures for all RQ's
 - You can simply run the following command: `python -W ignore reductionBarPlots.py {Configuration 1} {Configuration 2}` --- here `{Configuration 1}` and `{Configuration 2}` are placeholders. For example, if you want to create for RQ4 you can run following command:
- `python -W ignore requestCountBarPlots.py TMS TM`
+ `python -W ignore reductionBarPlots.py TMS TM`
 - This will generate plot pdf in `Figures/ReductionPlot.pd` 
 
 #### Generating `Distribution Plots` figures for all RQ's
 - You can simply run the following command: `python -W ignore requestDistribution.py {Configuration 1}` --- here `{Configuration 1}` is placeholders. For example, if you want to create for RQ2 you can run following command:
- `python -W ignore requestCountBarPlots.py TMS`
+ `python -W ignore rrequestDistribution.py TMS`
 - This will generate plot pdf in `Figures/DistributionPlot.pd` 
 
 #### Retrieving Figures folder on local to view it
