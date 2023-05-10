@@ -7,11 +7,9 @@ The ArXiv version of the manuscript is avaibable at : [Blocking JS without Break
 
 This repository provides the complete instrumentation to evaluate different JS blocking strategies proposed in the paper. 
 
-> This is rigorously tested on Macbook with stable internet connection.
-
 ## Methodology
-In this paper we propose three step process:
-1. **JavaScript Corpus Collection:**  In process we crawl landing pages of websites using chrome extension to capture network requests and its associated call stacks. Then, each request is labeled using Filter Lists.
+In this paper we propose a three step process:
+1. **JavaScript Corpus Collection:**  In this process we crawl landing pages of websites using chrome extension to capture network requests and its associated call stacks. Then, each request is labeled using Filter Lists.
 
 2. **Localizing Tracking and Functional JS Code:** We use previously labelled dataset to generate spectra of entites (script and methods) using spectra-based fault localization.
 ![webcheck](ScreenShots/webcheck.png)
@@ -24,6 +22,29 @@ In this paper we propose three step process:
 
 ## Installation
 
+#### 0. Minimum Requirements
+These artifacts are rigrously tested on Macbook with following configuration:
+1. Intel core i7 processor
+2. 4-core CPU
+3. 16 GB Ram
+4. 500 GB SSD
+   
+> Note that the base image in the dockerfile supports `amd64` i.e, x86-64 machines.
+
+##### Python dependency
+- numpy==1.24.3
+- pandas==2.0.1
+- adblockparser==0.7
+- openpyxl==3.1.2
+- pyvirtualdisplay==3.0
+- selenium==4.9.1
+- seaborn==0.12.2
+- tldextract==3.4.1
+- webdriver-manager==3.8.6
+- matplotlib==3.7.1
+- xlrd==2.0.1
+- beautifulsoup4==4.12.2
+
 #### 1. Clone the the github repository
 `git clone https://github.com/hadiamjad/Blocking-JavaScript-without-Breaking-the-Web.git` and move in the directory using `cd` command
 
@@ -31,6 +52,10 @@ In this paper we propose three step process:
 
 Make sure Docker has these minimum requirements:
 ![docker-build](ScreenShots/docker-requirements.png)
+
+Expected time for the build: approximately 50 seconds
+
+Expected image size: 2.05 GB
 
 - This command `docker build -t blockingjs .` will build docker image using Dockerfile.
 ![docker-build](ScreenShots/1.png)
@@ -63,10 +88,12 @@ Some important commands:
 
 - Create new tmux session for running **JavaScript Corpus Collection & Localizing Tracking and Functional JS Code** using this `tmux new -s client` command. This will automatically join the session as well.
 
-- Now run `cd Control/webpage-crawler-extension` and then once you are inside the directory, simply run `bash client.sh` to start crawler.  
+- Now run `cd Control/webpage-crawler-extension` and then once you are inside the directory, simply run `bash client.sh` or `chmod +x ./client.sh` followed by `./client.sh` to start crawler.  
 
 
 It involves crawlling the landing pages of 10 sample websites listed in 'Control\webpage-crawler-extension\csv\test.csv', then label it using filter lists, print the number of tracking and functional requests count in control setting, eventually run SBFL.py to generate tracking score for other configurations.
+
+Expected time:
 
 Once all steps are complete the output will look like this:
 ![Control](ScreenShots/4.png)
@@ -77,11 +104,13 @@ Once all steps are complete the output will look like this:
 ##### Step 3: Running JS Blocking Impact Analysis
 - Using the same tmux session i.e `client`, you can test other configurations. 
 
+Expected time:
+
 ###### Testing `ALL` configuration
 - Staying inside `client` session.
-- Go inside `cd ../../ALL/webpage-crawler-extension` and run `bash client.sh`.
+- Go inside `cd ../../ALL/webpage-crawler-extension` and run `bash client.sh`  or `chmod +x ./client.sh` followed by `./client.sh` .
 
- This will crawl the landing pages of websites(from previous step) in ALL setting(all tracking, functional and mixed scripts are blocked). This step will crawl the websites, then label it using filter lists, print the number of tracking and functional requests count in ALL setting. 
+ This will crawl the landing pages of websites(from previous step) in ALL setting(all tracking, functional and mixed scripts are blocked). This step will crawl the websites, then label it using filter lists, print the number of tracking and functional requests count in ALL setting.  
 
 > Note last two lines report the raw numbers (1) network request count and (2) missing functional tag URLs as a breakage metric. These numbers may vary from screenshot due to dynamic nature of website
 
@@ -93,7 +122,7 @@ The output will look like this(number may vary due to dynamic nature of websites
 ###### Testing `TS` configuration
 - Staying inside `client` session.
 
-- Go inside `cd ../../TS/webpage-crawler-extension` and run `bash client.sh`.
+- Go inside `cd ../../TS/webpage-crawler-extension` and run `bash client.sh`  or `chmod +x ./client.sh` followed by `./client.sh` .
 
  This will crawl the landing pages of websites(from Control setting) using chrome extension configured with TS setting where all tracking scripts are blocked. Then label it using filter lists, and print the number of tracking and functional requests count in TS setting. 
 
@@ -106,7 +135,7 @@ The output will look like this(number may vary due to dynamic nature of websites
 
 ###### Testing `MS` configuration
 - Staying inside `client` session.
-- Go inside `cd ../../MS/webpage-crawler-extension` and run `bash client.sh`.
+- Go inside `cd ../../MS/webpage-crawler-extension` and run `bash client.sh`  or `chmod +x ./client.sh` followed by `./client.sh` .
 
  This will crawl the landing pages of websites(from Control setting) using chrome extension configured with MS setting where all mixed scripts are blocked. Then label it using filter lists, and print the number of tracking and functional requests count in MS setting. 
 
@@ -119,7 +148,7 @@ The output will look like this(number may vary due to dynamic nature of websites
 
 ###### Testing `TMS` configuration
 - Staying inside `client` session.
-- Go inside `cd ../../TMS/webpage-crawler-extension` and run `bash client.sh`.
+- Go inside `cd ../../TMS/webpage-crawler-extension` and run `bash client.sh`  or `chmod +x ./client.sh` followed by `./client.sh` .
 
  This will crawl the landing pages of websites(from Control setting) using chrome extension configured with TMS setting where all tracking scripts and mixed scripts are blocked. Then label it using filter lists, and print the number of tracking and functional requests count in TMS setting. 
 
@@ -132,7 +161,7 @@ The output will look like this(number may vary due to dynamic nature of websites
 
 ###### Testing `TM` configuration
 - Staying inside `client` session.
-- Go inside `cd ../../TM/webpage-crawler-extension` and run `bash client.sh`.
+- Go inside `cd ../../TM/webpage-crawler-extension` and run `bash client.sh`  or `chmod +x ./client.sh` followed by `./client.sh` .
 
  This will crawl the landing pages of websites(from Control setting) using chrome extension configured with TM setting where all tracking methods are blocked. Then label it using filter lists, and print the number of tracking and functional requests count in TM setting. 
 
@@ -143,18 +172,27 @@ The output will look like this(number may vary due to dynamic nature of websites
 > Make sure you have stable internet otherwise it might end up with this error
 ![server](ScreenShots/internet.png)
 
+###### How to clear state if script crashes
+Before reeunning the `client.sh` script, clear the folders inside `server/output` for specific configuration.
+
 ### 5. Generating figures
 Go back in main directory `cd ../../`
 #### Generating `Number of Request` figures for all RQ's
-- You can simply run the following command: `python -W ignore requestCountBarPlots.py {Configuration 1} {Configuration 2}` --- here `{Configuration 1}`and `{Configuration 2}` are placeholders. For example, if you want to create for RQ4 you can run following command:
- `python -W ignore requestCountBarPlots.py TMS TM`
-- This will generate plot pdf in `Figures/BarPlot.pd` 
-> Note you can try TS MS for RQ2
+- You can simply run the following command: `python -W ignore requestCountBarPlots.py {Configuration 1} {Configuration 2}` --- here `{Configuration 1}`and `{Configuration 2}` are placeholders. For example:
+- RQ4: `python -W ignore requestCountBarPlots.py TMS TM`
+- RQ3: `python -W ignore requestCountBarPlots.py TS MS`
+- RQ1: `python -W ignore requestCountBarPlots.py ALL`
+
+
+> This will generate plot pdf in `Figures/BarPlot.pd` 
+
 
 #### Generating `% Reduction` figures for all RQ's
-- You can simply run the following command: `python -W ignore reductionBarPlots.py {Configuration 1} {Configuration 2}` --- here `{Configuration 1}` and `{Configuration 2}` are placeholders. For example, if you want to create for RQ4 you can run following command:
- `python -W ignore reductionBarPlots.py TMS TM`
-- This will generate plot pdf in `Figures/ReductionPlot.pd` 
+- You can simply run the following command: `python -W ignore reductionBarPlots.py {Configuration 1} {Configuration 2}` --- here `{Configuration 1}` and `{Configuration 2}` are placeholders. For example: 
+- RQ4: `python -W ignore reductionBarPlots.py TMS TM`
+- RQ4: `python -W ignore reductionBarPlots.py TS MS`
+- RQ4: `python -W ignore reductionBarPlots.py ALL`
+> This will generate plot pdf in `Figures/ReductionPlot.pd` 
 
 #### Generating `Distribution Plots` figures for all RQ's
 - You can simply run the following command: `python -W ignore requestDistribution.py {Configuration 1}` --- here `{Configuration 1}` is placeholders. For example, if you want to create for RQ2 you can run following command:
@@ -170,3 +208,7 @@ The container id is located on the docker shell
 ![tm](ScreenShots/container.png)
 
 `docker cp  7c486e87b63a:/Crawler/Figures .`
+
+### 6. Artifact Support
+- The artifact as of hash `4260a02`
+- contact: hadiamjad@vt.edu
