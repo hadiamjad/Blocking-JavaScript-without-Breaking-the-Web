@@ -14,14 +14,18 @@ import sys
 display = Display(visible=0, size=(800, 600))
 display.start()
 
+
 def extractDigits(lst):
     return list(map(lambda el: [el], lst))
 
 
-df = pd.DataFrame(extractDigits(os.listdir('../../Control/webpage-crawler-extension/server/output')), columns=['website'])
-#df = pd.read_csv(r"C:/Users/Hadiy/OneDrive/Desktop/ASE-22/csv/test.csv")
+df = pd.DataFrame(
+    extractDigits(os.listdir("../../Control/webpage-crawler-extension/server/output")),
+    columns=["website"],
+)
+# df = pd.read_csv(r"C:/Users/Hadiy/OneDrive/Desktop/ASE-22/csv/test.csv")
 # extractDigits(os.listdir('/home/student/TrackerSift/UserStudy/output'))
-#df = pd.DataFrame([["livescore.com"]], columns=["website"])
+# df = pd.DataFrame([["livescore.com"]], columns=["website"])
 
 
 count = 0
@@ -59,11 +63,15 @@ for i in df.index:
 
             # Collecting Metrics
             # 1: page HTML
-            f= open("server/output/" + df["website"][i] + "/pageHTML.txt","w+", encoding="utf-8")
+            f = open(
+                "server/output/" + df["website"][i] + "/pageHTML.txt",
+                "w+",
+                encoding="utf-8",
+            )
             f.write(str(driver.page_source))
             f.close()
             # 2: page Errors
-            f= open("server/output/" + df["website"][i] + "/pageErrors.txt","w+")
+            f = open("server/output/" + df["website"][i] + "/pageErrors.txt", "w+")
             f.write(str(driver.get_log("browser")))
             f.close()
 

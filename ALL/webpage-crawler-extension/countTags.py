@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import os
 
+
 def getMissingURLS(control_path, blocking_path):
 
     # Load the control setting HTML file
@@ -60,26 +61,38 @@ def getMissingURLS(control_path, blocking_path):
 
     return missing_urls
 
+
 def extractDigits(lst):
     return list(map(lambda el: [el], lst))
+
 
 def getURLLabel(url, control):
     for i in control.index:
         if url == control["http_req"][i]:
-            if (control["easylistflag"][i] == 1 or control["easyprivacylistflag"][i] == 1 or control["ancestorflag"][i] == 1):
+            if (
+                control["easylistflag"][i] == 1
+                or control["easyprivacylistflag"][i] == 1
+                or control["ancestorflag"][i] == 1
+            ):
                 return 1
             else:
                 return 0
     return 0
 
+
 def functionalMissingURLS(dic, missingfunctional_urls, control):
     for itm in dic:
         for url in dic[itm]:
             missingfunctional_urls[itm] += getURLLabel(url, control)
-            
+
 
 def main():
-    df = pd.DataFrame(extractDigits(os.listdir('../../Control/webpage-crawler-extension/server/output')), columns=['website'])
+    df = pd.DataFrame(
+        extractDigits(
+            os.listdir("../../Control/webpage-crawler-extension/server/output")
+        ),
+        columns=["website"],
+    )
     missingfunctional_urls = {
         "img": 0,
         "video": 0,
@@ -89,12 +102,20 @@ def main():
     }
     for j in df.index:
         try:
-            control = '../../Control/webpage-crawler-extension/server/output/' + df["website"][j] + '/pageHTML.txt'
-            blocking = 'server/output/' + df["website"][j] + '/pageHTML.txt'
+            control = (
+                "../../Control/webpage-crawler-extension/server/output/"
+                + df["website"][j]
+                + "/pageHTML.txt"
+            )
+            blocking = "server/output/" + df["website"][j] + "/pageHTML.txt"
             # Get the missing URLs
             missing_urls = getMissingURLS(control, blocking)
             # read netwrok json files
-            control_req = pd.read_json('../../Control/webpage-crawler-extension/server/output/' + df["website"][j] + '/label_request.json')
+            control_req = pd.read_json(
+                "../../Control/webpage-crawler-extension/server/output/"
+                + df["website"][j]
+                + "/label_request.json"
+            )
             functionalMissingURLS(missing_urls, missingfunctional_urls, control_req)
         except:
             pass

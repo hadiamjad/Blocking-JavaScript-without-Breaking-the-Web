@@ -194,23 +194,17 @@ def intilization(JSONfile_path, folder):
 
 
 def main():
-    fold = os.listdir(
-        "server/output"
-    )
+    fold = os.listdir("server/output")
     count = 0
     for f in fold:
         try:
-                print("labelling:",f)
-                intilization(
-                    "server/output/"
-                    + f
-                    + "/request.json",
-                    "server/output/"
-                    + f
-                    + "/",
-                )
+            print("labelling:", f)
+            intilization(
+                "server/output/" + f + "/request.json",
+                "server/output/" + f + "/",
+            )
         except:
-            count +=1
+            count += 1
             print(count)
 
 
